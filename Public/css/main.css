@@ -1,0 +1,362 @@
+/* GLOBAL CHANGES */
+body{
+    overflow-x: hidden;
+}
+/* NAVBAR */
+#searchbar{
+    width: 240%;
+    height: 29px;
+}
+
+.navbar-custom{
+     background-color: #4267b2;
+    border-bottom: #29487d;
+    height: 44px;
+}
+.navbarUser{
+    padding: 3px;
+    margin-right: 30em;
+}
+.navbarUser:hover{
+    background-color:#395897;
+    border-radius: 2px;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+/* login form */
+/* overWrite bootstrap files */
+.form-inline .form-control{
+    width:100%;
+}
+.navbarProfilePic{
+    border-radius:20px;
+    width:25px;
+    height: 25px;
+}
+.fa-sign-out-alt{
+    padding-top: 8px;
+}
+/* set width of forms to 100% */
+username,.password,.loginBtn{
+    width: 100%;
+}
+body{
+    background-color: #ebeef4;
+}
+.addFriend{
+    border: 1px solid black;
+    margin-left: 85%;
+    margin-top: -5%;
+    background: rgb(19, 19, 194);
+    color:white;
+}
+.addFriend:hover{
+    border: 1px solid black;
+    margin-left: 85%;
+    margin-top: -5%;
+    background: rgb(19, 19, 194);
+    color:white;
+}
+
+
+/* cover photo and profile picture */
+.coverImg{
+    width: 98%; 
+    height: 46%;
+    border:1px solid;
+}
+.profileImg{
+    border:6px solid white;
+    width: 160px;
+    height: 160px;
+    margin-top: -140px;
+    margin-left: 16px;
+    z-index: 1;
+}
+.nameCover{
+    color:white;
+    margin-left: 194px;
+    margin-top: -71px;
+    text-shadow: 1px 1px 1px black;
+    font-size: 1.9em;
+}
+
+/* posts zone */ 
+#posts{
+    margin-top: 50px;
+    z-index: 0;
+}
+/* LEFT SIDE */
+#about{
+    /* background-color: red; */
+    /* border:1px solid black; */
+     background:#ffffff;
+}
+.presentationProfile{
+    font-size: 16px;
+    margin-top:10px;
+    line-height: 20px;
+}
+.quote{
+    text-align: center;
+    font-size: 16px;
+    margin:10px;
+}
+
+.aboutText{
+    font-size: 14px;
+}
+
+/* images iterrration */
+.ImagesProfile{
+    font-size: 16px;
+    margin-top:30px;
+    line-height: 20px;
+}
+.profileImages{
+    width:100%;
+    heigth:300px;
+    margin:5px 0px;
+
+}
+
+
+
+/* RIGTH side */
+/* MODAL */
+.photoInput{
+    
+    margin:20px 0;
+}
+/* .photoInputBtn{
+    margin: 20px 35%;
+} */
+.dotsNameInline{
+    display: -webkit-box;
+}
+/* .fa-ellipsis-h-div{
+    margin-left: 105%;
+} */
+.posts{
+    /* background-color: blue; */
+    /* border:1px solid black; */
+
+}
+.postProfileImage{
+    width:50px;
+    heigth:50px;
+    margin-left: 10px;
+    border-radius:100px;
+}
+.postInput{
+    /* margin: 22px 112px; */
+    line-height: 25px;
+    border: none;
+    text-align: left;
+    word-break: break-word;
+    overflow:hidden;
+    height: 40px;
+}
+.newPost{
+    background-color: white;
+    /* border: 1px solid black; */
+}
+
+
+.postBtn{ /* buttons personalization */
+    border:1px solid #ebeef4;
+    border-radius: 20px;
+    background-color: #ebeef4;
+    color: black;
+    margin:5px;
+}
+.postBtn:hover{
+    background-color: white;
+    color: black;
+}
+.postLine{
+    width: 95%;
+    margin: 2px;
+}
+
+
+/* POSTS ZONE  */
+/* IMAGES POSTS */
+.imagePost{
+    background: white;
+    /* border:1px solid black; */
+    margin:10px 0px;
+}
+.postsProfile{
+    margin:10px;
+    font-size: 16px;
+}
+.postName{
+    font-size: 15px;
+    color: gray;
+}
+.postTop{
+    display: -webkit-box;
+    margin: 10px 0px;
+    padding-top: 10px;
+}
+.namePost{
+    font-size: 16px;
+    color:#365899;
+}
+.postDate{
+    font-size: 10px;
+    margin-top: -4px;
+    margin-left:2px;
+}
+.postImageTop{
+    margin: 0px 7px;
+}
+.postDescription{
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+/* SIMPLE POSTS */
+.simplePost{
+    /* border:1px solid black; */
+    background: #ffffff;
+    margin: 10px 0;
+}
+/* SOCIAL BUTTONS */
+.socialButton{
+    color:gray;
+    font-size:15px;
+    margin: 0;
+    padding:0px 70px;
+}
+
+
+
+.buttons{
+    display: -webkit-box;
+    height: 33px;
+}
+.socialBtn{
+    background-color: white;
+}
+.socialBtn:hover{
+    background-color: #ebeef4;
+}
+
+.like{
+    margin-left: 10px;
+}
+/* .socialButtons{
+    height: 45px;   
+} */
+/* FRIENDS */
+.friendsTop{
+    margin-top:60px;
+    margin-left:10px;
+    font-size: 16px;
+}
+.friendsContainer{
+    border-left: 1px solid #5e5c5c;
+    height: 100%;
+    width: 100%;
+    position:fixed;
+}
+
+.friendName{
+    font-size: 16px;
+}
+.friendsImagesItter{
+    border-radius: 50%;
+    width:35px;
+    height: 35px;
+    margin: 0px 10px;
+}
+/* contain name and image */
+.friendBox{
+    display: -webkit-box;
+    font-size: 16px;  
+    color: black;  
+}
+.friendBox:hover{
+    background: #d5d8dd;
+    color: black
+}
+
+/* ADD COMMENTS */
+
+
+.commentsNumber:hover{
+    text-decoration: underline;
+}
+.addComment{
+    margin-top: 15px;
+}
+.addCommentInput{
+    border-radius: 40px;
+    width:83%;
+    border:1px solid rgb(209, 208, 208);
+    background-color:#ebeef4;
+    padding: 4px;
+    padding-left: 11px;
+}
+.comment{
+    background-color:#ebeef4;
+    border: 1px solid  rgb(209, 208, 208);
+    border-radius: 40px;
+    font-size: 13px;
+    width: 83%;
+    height: 30px;
+    padding: 5px;
+
+}
+.commText{
+    font-size: 13px;
+    padding: 2.4px;
+    padding-left: 6px;
+}
+.commAuthor{
+    color: #214c79;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.inlineCommElem{
+    display:-webkit-box;
+    padding-bottom: 8px;
+}
+.commentProfileImg{
+    width: 30px;
+    heigth: 30px;
+    margin-left: 10px;
+    border-radius: 100px;
+    margin-right: 7px;
+}
+
+/* social cnt */
+.likesNumber{
+    padding-left: 14px;
+}
+.commentsNumber{
+    /* text-align: right; */
+    padding-left: 13px;
+    color: gray;
+}
+.socialCont{
+    display: -webkit-flex;
+}
+.activatedLike{
+    color:blue;
+}

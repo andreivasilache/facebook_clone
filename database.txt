@@ -1,0 +1,7 @@
+---USER
+-	username
+-	password
+-	email
+- 	images
+-	friends
+- 	birth date

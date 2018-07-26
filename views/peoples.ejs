@@ -1,0 +1,115 @@
+<% include ./partials/header %>
+<!-- head zone -->
+
+ <div class="row">
+    
+    <div class="col-sm-1"></div>  <!-- Free space -->
+    <div class="col-sm-7"> <!-- middle(posts) -->
+        <img class="coverImg" src='<%=user.coverPic%>'>
+        <h1></h1>
+        <div id="profilPic">
+        <img class="profileImg" src="<%=user.profilePic%>">
+        <h1 class="nameCover"><%= user.name%></h1>
+        <form action="/profile/<%-loggedUser.username%>/addfriend/<%-user.username%>" method="POST">
+        <button class="btn addfriend">Add friend</button>
+        </form>
+        
+        <div class="container" id="posts">
+                <div class="row" >
+                        <div class="col-sm-4" id="about" > <!-- About -->
+                            <div>
+                                <h1 class="presentationProfile"><i class="fas fa-globe "></i> Presentation:</h1>
+                                <h1 class="quote"><%=user.quote%></h1>
+                                <h1 class="aboutText"><i class="fas fa-home"></i> Lives in:  <%=user.from %></h1>
+                                <% if(user.maried){ %>
+                                    <h1 class="aboutText"><i class="fas fa-heart"></i> Maried </h1>
+                                 <% }else{ %>
+                                    <h1 class="aboutText"><i class="fas fa-heart"></i> Not married </h1>
+                                <% } %>
+                                <h1 class="aboutText"><i class="fas fa-clock"></i> Sing-in date: <%= user.createdOn.toUTCString() %> </h1>
+                            </div>
+                            <div>
+                                <h1 class="ImagesProfile"><i class="fas fa-image"></i>  Images:  </h1>
+                                <% for(var i=0;i<=user.posts.length-1;i++){  %>
+                                    <% if(user.posts[i].image){%>
+                                        <div>
+                                            <img class="profileImages" src="<%=user.posts[i].image %>" >
+                                        </div>
+                                        <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="col-sm-1" ></div>  <!-- Free space -->
+                      <!-- posts -->
+                            <h3 class="postsProfile">Posts</h3>
+                            <div class="posts">
+                                <% for(var i=user.posts.length-1;i>=0;i--){  %>
+                                    <% if(user.posts[i].image){ %>
+                                        <div class="imagePost">
+                                                <div class="postTop">
+                                                    <img class="postProfileImage" src="<%=user.profilePic%>"> 
+                                                    <div class="postImageTop">
+                                                        <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.name%></a> added a new image.</h1>
+                                                        <h1 class="postDate"><%= user.posts[i].createdOn.toUTCString() %></h1>
+                                                    </div>
+                                                </div>
+                                                    <h1 class="postDescription"><%-user.posts[i].description %></h1>
+                                                    <img class="profileImages" src="<%=user.posts[i].image %>">
+                                                    <div class="socialButtons">
+                                                            <hr class="postLine">
+                                                            <div class="buttons">
+                                                                    <div class="like">
+                                                                        <a href="" class="btn"> <h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></a>
+                                                                        </div>
+                                                                        <div class="comments">
+                                                                            <a href="" class="btn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></a> 
+                                                                        </div>
+                                                            </div>
+                                                            <hr class="postLine">
+                                                        </div>
+                                        </div>
+                              
+                                    <% }else{ %>
+                                        <div class="simplePost">
+                                                <div class="postTop">
+                                                    <img class="postProfileImage" src="<%=user.profilePic%>"> 
+                                                    <div class="postImageTop">
+                                                        <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.name%></a> added a new post.</h1>
+                                                        <h1 class="postDate"><%= user.posts[i].createdOn.toUTCString() %></h1>
+                                                    </div>
+                                                </div>
+                                                <h1 class="postDescription"><%-user.posts[i].description %></h1>
+                                               
+                                                <div class="socialButtons">
+                                                    <hr class="postLine">
+                                                    <div class="buttons">
+                                                            <div class="like">
+                                                                <a href="" class="btn"> <h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></a>
+                                                                </div>
+                                                                <div class="comments">
+                                                                    <a href="" class="btn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></a> 
+                                                                </div>
+                                                    </div>
+                                                    <hr class="postLine">
+                                                </div>
+                                        </div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+<!-- rigth(friends) -->
+
+
+
+
+
+
+<%include ./partials/footer %>
