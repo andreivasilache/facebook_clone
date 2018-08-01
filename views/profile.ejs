@@ -6,14 +6,71 @@
     <div class="col-sm-1"></div>  <!-- Free space -->
     <div class="col-sm-7"> <!-- middle(posts) -->
         <img class="coverImg" src='<%=user.coverPic%>'>
+        <!-- Modal cover pic -->
+        <button type="button" class="btn btn-outline-primary profileCoverEdit" data-toggle="modal" data-target="#CoverPic">
+                <i class="far fa-edit"></i>
+        </button>
+        <div class="modal fade" id="CoverPic"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change cover picture</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="CoverPicModalForm" action="/profile/<%=user.username%>/edit/coverPic" method="POST">
+                            <input class="form-control" placeholder="New profile image link" type="text" name="coverPic">
+                            <button onclick="formSubmitCoverPic()" type="button" class="btn btn btn-outline-success profilePictureModal btn-block">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="profilPic">
             <img class="profileImg" src="<%=user.profilePic%>">
-            <h1 class="nameCover"><%= user.name%></h1>
+            <!-- modal for profilePic edit -->
+            <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-primary profilePicEdit" data-toggle="modal" data-target="#profilePic">
+                        <i class="far fa-edit"></i>
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="profilePic"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Change profile picture</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="profilePicModalForm" action="/profile/<%=user.username%>/edit/profilePic" method="POST">
+                                    <input class="form-control" placeholder="New profile image link" type="text" name="porfilePic">
+                                    <button onclick="formSubmitProfilePic()" type="button" class="btn btn btn-outline-success profilePictureModal btn-block">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div>
+                <h1 class="nameCover"><%= user.firstName%></h1><h1 class="nameCover"><%= user.secondName%></h1>
+            </div>
+            
             <div class="container" id="posts">
                     <div class="row" >
                             <div class="col-sm-4" id="about" > <!-- About -->
                                 <div>
-                                    <h1 class="presentationProfile"><i class="fas fa-globe "></i> Presentation:</h1>
+                                    <h1 class="presentationProfile"><i class="fas fa-globe "></i> Presentation: 
+                                        <button class="btn btn-outline-dark quoteTrigger">Edit</button>
+                                        <form action="/profile/<%=user.username%>/edit/quote" method="POST" id="quoteTextarea">
+                                            <textarea name="quote" class="quoteInput" cols="34" rows="1" placeholder="Say something about you"></textarea>
+                                            <button class="btn btn-success btn-block">Save</button>
+                                        </form> 
+                                    </h1>
                                     <h1 class="quote"><%=user.quote%></h1>
                                     <h1 class="aboutText"><i class="fas fa-home"></i> Lives in:  <%=user.from %></h1>
                                     <% if(user.maried){ %>
@@ -47,7 +104,6 @@
                                     </div>
                                 </form>
                                 <!-- Large modal -->
-                                
 
                                 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
@@ -62,10 +118,6 @@
                                     </div>
                                 </div>
                                 </div>
-                                    
-                                    
-                                    
-                        
                             
                                 <h3 class="postsProfile">Posts</h3>
                                 
@@ -76,7 +128,7 @@
                                                     <div class="postTop">
                                                         <img class="postProfileImage" src="<%=user.profilePic%>"> 
                                                         <div class="postImageTop">
-                                                                <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.name%></a> added a new image.</h1>
+                                                                <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.firstName%><%=user.secondName%></a> added a new image.</h1>
                                                                 <h1 class="postDate"><%=user.posts[i].createdOn.toUTCString() %></h1>
                                                                 <form action="/profile/<%=user.username%>/removePost/<%=user.posts[i]._id%>?_method=DELETE" method="POST">
                                                                     <button><i class="fas fa-trash-alt"></i> </button> 
@@ -102,30 +154,37 @@
                                                                 <hr class="postLine">
                                                                 <div class="buttons">
                                                                         <div class="like">
-                                                                                <% if(user.posts[i].likes.length !=0){%>
-                                                                                    <% for(var k=0;k<=user.posts[i].likes.length-1;k++){ %>
-                                                                                        <!-- There can't be any likes,so so display simple like -->
-                                                                                            <% if(user.posts[i].likes[k].username != user.username){ %>
-                                                                                                <!-- like -->
-                                                                                                <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-user.username%>" method="POST">
-                                                                                                    <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
-                                                                                                </form>
-                                                                                                <% break %> 
-                                                                                            <% }else{ %>
-                                                                                                <!-- unlike if is liked -->
-                                                                                                <!-- Delete like from database on second click -->
-                                                                                                <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/unlike/<%-user.username%>?_method=DELETE" method="POST">
-                                                                                                    <button class="btn "><h1 class="socialButton activatedLike"><i class="far fa-thumbs-up"></i>Like</h1></button>
-                                                                                                </form>
-                                                                                                <% break %>
-                                                                                            <% } %>
-                                                                                    <% } %>
-                                                                                    <% }else{%>
-                                                                                        <!-- like -->
-                                                                                        <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-user.username%>" method="POST">
-                                                                                            <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
-                                                                                        </form>
-                                                                                        <% }%>
+                                                                            <% if(user.posts[i].likes.length !=0){%>
+                                                                                <% var likedImage=false %>
+                                                                                <% for(var k=0;k<=user.posts[i].likes.length-1;k++){ %>
+                                                                                    <!-- There can't be any likes,so so display simple like -->
+                                                                                        <% if(user.posts[i].likes[k].username == user.username){ %>
+                                                                                            <% likedImage=true %>
+                                                                                            <% break %> 
+                                                                                        <% }else{ %>
+                                                                                            <% likedImage=false %>
+                                                                                            <!-- unlike if is liked -->
+                                                                                        <% } %>
+                                                                                <% } %>
+
+                                                                                <%  if(likedImage){ %>
+                                                                                    <!-- Delete like from database on second click -->
+                                                                                    <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/unlike/<%-user.username%>?_method=DELETE" method="POST">
+                                                                                        <button class="btn "><h1 class="socialButton activatedLike"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                                    </form>
+                                                                                <%  }else{ %>
+                                                                                    <!-- like -->
+                                                                                    <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-user.username%>" method="POST">
+                                                                                        <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                                    </form>
+                                                                                <% } %>
+
+                                                                            <% }else{ %>
+                                                                                <!-- like -->
+                                                                                <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-user.username%>" method="POST">
+                                                                                    <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                                </form>
+                                                                            <%}%>
                                                                                 </div>
                                                                             <div class="comments">
                                                                                 <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></button> 
@@ -146,9 +205,9 @@
                                                                                 
                                                                                 <div class="comment inlineCommElem">
                                                                                         <% if(user.posts[i].comments[j].username == user.username){ %>
-                                                                                            <a class="commAuthor" href="/profile/<%=user.username%>"><%=user.name%></a>
+                                                                                            <a class="commAuthor" href="/profile/<%=user.username%>">@<%=user.posts[i].comments[j].username%></a>
                                                                                         <% }else{ %>
-                                                                                            <a href="/profile/<%=user.username%>/people/<%=user.posts[i].comments[j].username%>"><%=user.posts[i].comments[j].username%></a>
+                                                                                            <a class="commAuthor" href="/profile/<%=user.username%>/people/<%=user.posts[i].comments[j].username%>">@<%=user.posts[i].comments[j].username%></a>
                                                                                         <% } %>
                                                                                         <h1 class="commText"><%=user.posts[i].comments[j].text%> </h1>
                                                                                 </div>
@@ -170,7 +229,7 @@
                                                     <div class="postTop">
                                                         <img class="postProfileImage" src="<%=user.profilePic%>"> 
                                                         <div class="postImageTop">
-                                                                <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.name%></a> added a new post.</h1>
+                                                                 <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.firstName%> <%=user.secondName%></a> added a new post.</h1>
                                                                  <h1 class="postDate"><%= user.posts[i].createdOn.toUTCString() %></h1>
                                                                  <form action="/profile/<%=user.username%>/removePost/<%=user.posts[i]._id%>?_method=DELETE" method="POST">
                                                                     <button><i class="fas fa-trash-alt"></i> </button> 
@@ -195,29 +254,34 @@
                                                         <div class="buttons">
                                                     <div class="like">
                                                         <% if(user.posts[i].likes.length !=0){%>
+                                                            <% var likedPost=false %>
                                                             <% for(var k=0;k<=user.posts[i].likes.length-1;k++){ %>
                                                                 <!-- There can't be any likes,so so display simple like -->
-                                                                    <% if(user.posts[i].likes[k].username != user.username){ %>
-                                                                        <!-- like -->
-                                                                        <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-user.username%>" method="POST">
-                                                                            <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
-                                                                        </form>
+                                                                    <% if(user.posts[i].likes[k].username == user.username){ %>
+                                                                        <% likedPost=true %>
                                                                         <% break %> 
                                                                     <% }else{ %>
-                                                                        <!-- unlike if is liked -->
-                                                                        <!-- Delete like from database on second click -->
-                                                                        <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/unlike/<%-user.username%>?_method=DELETE" method="POST">
-                                                                            <button class="btn "><h1 class="socialButton activatedLike"><i class="far fa-thumbs-up"></i>Like</h1></button>
-                                                                        </form>
-                                                                        <% break %>
+                                                                        <% likedPost=false %>
                                                                     <% } %>
                                                             <% } %>
-                                                            <% }else{%>
+                                                           <%if(likedPost){ %>
+                                                                <!-- Delete like from database on second click -->
+                                                                <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/unlike/<%-user.username%>?_method=DELETE" method="POST">
+                                                                    <button class="btn "><h1 class="socialButton activatedLike"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                </form>
+                                                          <% }else{ %>
                                                                 <!-- like -->
                                                                 <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-user.username%>" method="POST">
                                                                     <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
                                                                 </form>
-                                                                <% }%>
+                                                           <% } %>
+
+                                                        <% }else{%>
+                                                            <!-- like -->
+                                                            <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-user.username%>" method="POST">
+                                                                <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                            </form>
+                                                        <% }%>
                                                         </div>
                                                                     <div class="comments">
                                                                         <button  class="btn socialBtn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></button> 
@@ -265,17 +329,14 @@
     
     <div class="friendsContainer">
         <h3 class="friendsTop">Friends</h3>
-       <% user.friends.forEach( function(friendItter){ %>
-        
+            <% for(var w=0;w<=user.friends.length-1;w++){ %>
                 <div >
-                        <a class="btn friendBox" href="/profile/<%-user.username%>/people/<%-friendItter.username%>">
-                        <img class="friendsImagesItter" src="<%-friendItter.profilePic%>" >
-                         <h1 class="friendName"><%- friendItter.name %></h1>
-                        </a>
-                 </div>
-        
-      
-        <% }) %>
+                    <a class="btn friendBox" href="/profile/<%-user.username%>/people/<%-user.friends[w].username%>">
+                    <img class="friendsImagesItter" src="<%-user.friends[w].profilePic%>" >
+                        <h1 class="friendName"><%-user.friends[w].name%> </h1>
+                    </a>
+                </div>
+        <% }%>
         
     </div>
 </div>

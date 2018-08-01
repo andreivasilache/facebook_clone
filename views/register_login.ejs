@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/register.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <body>
+        <h1 class="freeBook">
+            <span class="free">Free</span><span class="book">Book</span>
+         </h1>
+        <div class="row">
+            <div class="col-sm-5 " >
+                <div id="register">
+                        <h1>Create an account</h1>
+                        <button class="btn btn-outline-light registerBtn">Register</button>
+                </div>
+                <div id="registerForm">
+                    <form action="/register" method="POST">
+                    <div class="row namesInline">
+                            <input class="form-control register Fname col-6" type="text" placeholder="First name" name="firstName" required>
+                            <input class="form-control register Sname col-6" type="text" placeholder="Second name" name="secondName" required >
+                    </div>
+                    <input class="form-control register profileImage" type="text" placeholder="Profile Image Link"  name="profilePic">
+                    <input class="form-control register coverImage" type="text" placeholder="Cover Image Link"  name="coverPic">
+                    <!-- <input class="form-control register email" type="email" placeholder="Email" pattern=".+@gmail.com" name="email" required> -->
+                    <input class="form-control register from" type="text" placeholder="You live in" name="live" required>
+                    <input class="form-control register username" type="text" placeholder="Username" name="username" required>
+                    <input class="form-control register password" type="password" placeholder="Password" name="password" required>
+                    <div class="row radio">
+                            <div class="married col-6">
+                                    <h4>Married:</h4>
+                                    <input class="register married" type="radio" name="gender" value="true"> Yes
+                                    <input class="register married" type="radio" name="gender" value="false"> No
+                            </div>
+                    </div>       
+                        <button class="btn btn-outline-light btn-block registerFormBtn">Register</button>
+                    </form>
+                </div>
+            </div>
+        <div class="col-sm-2" id="middle">
+            <div class="center-line-up"></div>
+            <!-- <button class="btn btn-outline-light or">Or</button> -->
+            <h1 class=" or">Or</h1>
+
+            <div class="center-line-down"></div>
+        </div>
+            <div class="col-sm-5 " >
+                <div id="login">
+                        <h1>Log-in to our page</h1>
+                        <button class="btn btn-outline-light loginBtn">Log-in</button>
+                </div>
+                <form action="/login" method="POST">
+                    <div id="loginForm">
+                            <input class="form-control login username" type="text" name="username" placeholder="Username">
+                            <input class="form-control login password" type="password" name="password" placeholder="Password">
+                            <button class="btn btn-outline-light btn-block registerFormBtn">Log-in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </body>
+</html>
+
+
+
+<!-- BOOTSTRAP -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<!-- PERSONAL -->
+<script src="./script/register.js"></script>

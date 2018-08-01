@@ -1,4 +1,4 @@
-<% include ./partials/header %>
+<% include ./partials/headerPeople %>
 <!-- head zone -->
 
  <div class="row">
@@ -9,13 +9,35 @@
         <h1></h1>
         <div id="profilPic">
         <img class="profileImg" src="<%=user.profilePic%>">
-        <h1 class="nameCover"><%= user.name%></h1>
-        <form action="/profile/<%-loggedUser.username%>/addfriend/<%-user.username%>" method="POST">
-        <button class="btn addfriend">Add friend</button>
-        </form>
+        <h1 class="nameCover"><%= user.firstName%> <%=user.secondName%></h1>
+
+     <% if(loggedUser.friends.length == 0){%> <!-- if user array is empty,and we can't itter it. -->
+            <form action="/profile/<%-loggedUser.username%>/addfriend/<%-user.username%>" method="POST">
+                <button class="btn addfriend">Add friend</button>
+            </form> 
+        <%}else{%>
+           <% var found=false %>
+            <% for(var i=0;i<=loggedUser.friends.length-1;i++){ %>
+                <% if(loggedUser.friends[i].username == user.username){ %>
+                    <% var found=true %>
+                    <% break %>
+                <% }else{%>
+                    <% var found=false %>
+                <% } %>
+            <% } %> 
+          <%  if(found){ %>
+                    <form action="/profile/<%-loggedUser.username%>/unfriend/<%-user.username%>?_method=DELETE" method="POST">
+                        <button class="btn removefriend"> Remove friend </button>
+                    </form> 
+          <%  }else{ %>
+                <form action="/profile/<%-loggedUser.username%>/addfriend/<%-user.username%>" method="POST">
+                    <button class="btn addfriend"> Add friend </button>
+                </form>  
+           <% } %>
+    <% }%>
         
         <div class="container" id="posts">
-                <div class="row" >
+                <div class="row">
                         <div class="col-sm-4" id="about" > <!-- About -->
                             <div>
                                 <h1 class="presentationProfile"><i class="fas fa-globe "></i> Presentation:</h1>
@@ -40,7 +62,7 @@
                             </div>
                         </div>
                         <div class="col-sm-1" ></div>  <!-- Free space -->
-                      <!-- posts -->
+                        <div class="col-sm-7">
                             <h3 class="postsProfile">Posts</h3>
                             <div class="posts">
                                 <% for(var i=user.posts.length-1;i>=0;i--){  %>
@@ -49,24 +71,94 @@
                                                 <div class="postTop">
                                                     <img class="postProfileImage" src="<%=user.profilePic%>"> 
                                                     <div class="postImageTop">
-                                                        <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.name%></a> added a new image.</h1>
+                                                        <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%= user.firstName%> <%=user.secondName%> </a> added a new image.</h1>
                                                         <h1 class="postDate"><%= user.posts[i].createdOn.toUTCString() %></h1>
                                                     </div>
                                                 </div>
                                                     <h1 class="postDescription"><%-user.posts[i].description %></h1>
                                                     <img class="profileImages" src="<%=user.posts[i].image %>">
+                                                    <div class="socialCont">
+                                                            <% if( user.posts[i].comments.likes === 1){ %>
+                                                                <h6 class="likesNumber"><%=user.posts[i].likes.length%> like</h6>
+                                                            <%}else{ %>
+                                                                <h6 class="likesNumber"><%=user.posts[i].likes.length%> likes</h6>
+                                                            <% } %>
+                                                            <% if( user.posts[i].comments.length === 1){ %>
+                                                                <h6 class="commentsNumber"><%=user.posts[i].comments.length%> comment</h6>
+                                                            <% }else{ %>
+                                                                <h6 class="commentsNumber"><%=user.posts[i].comments.length%> comments</h6>
+                                                            <% } %>
+                                                    </div>
                                                     <div class="socialButtons">
                                                             <hr class="postLine">
                                                             <div class="buttons">
                                                                     <div class="like">
-                                                                        <a href="" class="btn"> <h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></a>
-                                                                        </div>
+                                                                        <% if(user.posts[i].likes.length !=0 ){%>
+                                                                            <% var likedImage=false%>
+                                                                            <% for(var k=0;k<=user.posts[i].likes.length-1;k++){ %>
+                                                                                    <% if(user.posts[i].likes[k].username == loggedUser.username){ %>
+                                                                                        <%  likedImage=true%>
+                                                                                        <% break %>
+                                                                                    <% }else{ %>
+                                                                                        <!-- unlike if is liked -->
+                                                                                        <%  likedImage=false %>
+                                                                                    <% } %>
+                                                                            <% } %>
+                                                                            <% if(likedImage){%>
+                                                                                    <!-- Delete like from database on second click -->
+                                                                                    <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/unlike/<%-loggedUser.username%>?_method=DELETE" method="POST">
+                                                                                        <button class="btn "><h1 class="socialButton activatedLike"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                                    </form>
+                                                                            <% }else{%>
+                                                                                    <!-- like -->
+                                                                                    <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-loggedUser.username%>" method="POST">
+                                                                                        <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                                    
+                                                                                    </form>
+                                                                            <%}%>
+                                                                        <%}else{%>
+                                                                            <!-- There can't be any likes,so  display default unliked -->
+                                                                            <!-- like -->
+                                                                            <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-loggedUser.username%>" method="POST">
+                                                                                <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                            </form>
+                                                                        <%}%>
+                                                                    </div>
                                                                         <div class="comments">
-                                                                            <a href="" class="btn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></a> 
+                                                                                <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></button> 
                                                                         </div>
                                                             </div>
                                                             <hr class="postLine">
+                                                            <div class="addComment">                                                                 <!-- Who's posting comment username -->
+                                                                <form class="commShow" action="/profile/<%=user.username%>/<%=user.posts[i]._id%>/addComment/<%=loggedUser.username%>" method="POST">
+                                                                    <img src="<%=loggedUser.profilePic%>" class="friendsImagesItter">
+                                                                    <input name="comment" type="text" class="addCommentInput" placeholder="Write a comment">
+                                                                </form>
+                                                            </div>
                                                         </div>
+                                                        <div class="commentsItter">
+                                                                <% for(var j=0;j<=user.posts[i].comments.length-1;j++){ %>
+                                                            <form action="/profile/<%=user.username%>/<%=user.posts[i]._id%>/deleteComm/<%=user.posts[i].comments[j]._id%>?_method=DELETE" method="POST">
+                                                                        <div class="inlineCommElem">
+                                                                            <img class="commentProfileImg" src="<%=user.posts[i].comments[j].profileImage%>" alt="">
+                                                                            <div class="comment inlineCommElem">
+                                                                                    <% if(user.posts[i].comments[j].username == loggedUser.username){ %>
+                                                                                        <a class="commAuthor" href="/profile/<%=user.username%>"><%=user.posts[i].comments[j].username%></a>
+                                                                                    <% }else{ %>
+                                                                                        <a  href="/profile/<%=user.username%>/people/<%=user.posts[i].comments[j].username%>"><%=user.posts[i].comments[j].username%></a>
+                                                                                    <% } %>
+                                                                                    <h1 class="commText"><%=user.posts[i].comments[j].text%> </h1>
+                                                                            </div>
+                                                                            
+                                                                                <% if(user.posts[i].comments[j].username == loggedUser.username){ %>
+                                                                                    <button> <i class="fas fa-trash-alt commentDelBtn"></i></button>
+                                                                                <% }%>
+                                                                        </div>
+                                                            </form>
+                                                                    <% }%>
+                                                            </div>
+                                                            <hr class="postLine">
+                                                            <!--  -->
                                         </div>
                               
                                     <% }else{ %>
@@ -74,21 +166,62 @@
                                                 <div class="postTop">
                                                     <img class="postProfileImage" src="<%=user.profilePic%>"> 
                                                     <div class="postImageTop">
-                                                        <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%=user.name%></a> added a new post.</h1>
+                                                        <h1 class="postName"> <a href="/profile/<%=user.username%>" class="namePost"><%= user.firstName%> <%=user.secondName%></a> added a new post.</h1>
                                                         <h1 class="postDate"><%= user.posts[i].createdOn.toUTCString() %></h1>
                                                     </div>
                                                 </div>
                                                 <h1 class="postDescription"><%-user.posts[i].description %></h1>
+                                                <div class="socialCont">
+                                                        <% if( user.posts[i].comments.likes === 0){ %>
+                                                            <h6 class="likesNumber"><%=user.posts[i].likes.length%> like</h6>
+                                                            <%}else{ %>
+                                                            <h6 class="likesNumber"><%=user.posts[i].likes.length%> likes</h6>
+                                                        <% } %>
+                                                        <% if( user.posts[i].comments.length === 0){ %>
+                                                            <h6 class="commentsNumber"><%=user.posts[i].comments.length%> comment</h6>
+                                                            <% }else{ %>
+                                                            <h6 class="commentsNumber"><%=user.posts[i].comments.length%> comments</h6>
+                                                        <% } %>
+                                                    </div>
                                                
                                                 <div class="socialButtons">
                                                     <hr class="postLine">
                                                     <div class="buttons">
-                                                            <div class="like">
-                                                                <a href="" class="btn"> <h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></a>
-                                                                </div>
+                                                    <div class="like">
+                                                        <% if(user.posts[i].likes.length !=0){%>
+                                                            <% var likedPost=false %>
+                                                            <% for(var k=0;k<=user.posts[i].likes.length-1;k++){ %>
+                                                                <!-- There can't be any likes,so so display simple like -->
+                                                                <% if(user.posts[i].likes[k].username == loggedUser.username){ %>
+                                                                        <% likedPost=true%>
+                                                                        <% break %>
+                                                                    <% }else{ %>
+                                                                        <% likedPost=false%>
+                                                                    <% } %>
+                                                            <% } %>
+                                                               <% if(likedPost){ %>
+                                                                    <!-- Delete like from database on second click -->
+                                                                    <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/unlike/<%-loggedUser.username%>?_method=DELETE" method="POST">
+                                                                        <button class="btn "><h1 class="socialButton activatedLike"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                    </form>
+                                                              <%  }else{%>
+                                                                    <!-- like -->
+                                                                    <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-loggedUser.username%>" method="POST">
+                                                                        <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                                    </form>
+                                                               <% }%>
+                                                        <% }else{%>
+                                                            <!-- like -->
+                                                            <form action="/profile/<%-user.posts[i].username%>/<%-user.posts[i]._id%>/like/<%-loggedUser.username%>" method="POST">
+                                                                <button class="btn socialBtn"><h1 class="socialButton"><i class="far fa-thumbs-up"></i>Like</h1></button>
+                                                            </form>
+                                                        <% } %>
+                                                    </div>
+                                                                
                                                                 <div class="comments">
-                                                                    <a href="" class="btn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></a> 
+                                                                        <button  class="btn socialBtn"><h1 class="socialButton"><i class="far fa-comment"></i>Comment</h1></button> 
                                                                 </div>
+                                                            </div>
                                                     </div>
                                                     <hr class="postLine">
                                                 </div>
@@ -96,6 +229,9 @@
                                     <% } %>
                                 <% } %>
                             </div>
+                        </div>
+                      <!-- posts -->
+                         
                         </div>
                     </div>
         </div>

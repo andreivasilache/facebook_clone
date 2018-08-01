@@ -1,16 +1,17 @@
 var mongoose=require("mongoose");
+var passportLocalMongoose=require("passport-local-mongoose");
 
 var userSchema=new mongoose.Schema({
     username:String,
     password:String,
-    name:String,
+    firstName:String,
+    secondName:String,
     maried:Boolean,
     createdOn: { type: Date, default: Date.now },
     from:String,
     quote:String, //profile quote
     coverPic:String,
     profilePic:String,
-
 
     friends:[
         {
@@ -44,4 +45,5 @@ var userSchema=new mongoose.Schema({
     ]
 });
 
+userSchema.plugin(passportLocalMongoose);
 module.exports=mongoose.model("User",userSchema);

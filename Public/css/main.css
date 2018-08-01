@@ -66,8 +66,32 @@ body{
     border: 1px solid black;
     margin-left: 85%;
     margin-top: -5%;
+    background: rgb(62, 62, 206);
+    color:white;
+}
+.removefriend{
+    border: 1px solid black;
+    margin-left: 80%;
+    margin-top: -6%;
     background: rgb(19, 19, 194);
     color:white;
+}
+.removefriend:hover{ 
+    border: 1px solid black;
+    margin-left: 80%;
+    margin-top: -6%;
+    background: rgb(62, 62, 206);
+    color:white;
+}
+
+/* Profile edits */
+.quoteInput{
+    line-height: 25px;
+    border: 1px solid blue;
+    text-align: left;
+    word-break: break-word;
+    overflow: hidden;
+    height: 40px;
 }
 
 
@@ -91,6 +115,20 @@ body{
     margin-top: -71px;
     text-shadow: 1px 1px 1px black;
     font-size: 1.9em;
+}
+.usernameCover{
+
+}
+.profilePicEdit{
+    margin-top: -45px;
+    margin-left: -60px;
+}
+.profilePictureModal{
+    margin-top: 8px;
+}
+.profileCoverEdit{
+    margin-left: 91%;
+    margin-top: -40px;
 }
 
 /* posts zone */ 
@@ -155,10 +193,11 @@ body{
 
 }
 .postProfileImage{
+    height:50px;
     width:50px;
-    heigth:50px;
     margin-left: 10px;
     border-radius:100px;
+    margin-top: 10px;
 }
 .postInput{
     /* margin: 22px 112px; */
@@ -168,6 +207,7 @@ body{
     word-break: break-word;
     overflow:hidden;
     height: 40px;
+    width:96%;
 }
 .newPost{
     background-color: white;
@@ -319,7 +359,7 @@ body{
     font-size: 13px;
     width: 83%;
     height: 30px;
-    padding: 5px;
+    padding: 3px;
 
 }
 .commText{
@@ -339,7 +379,7 @@ body{
 }
 .commentProfileImg{
     width: 30px;
-    heigth: 30px;
+    height: 30px;
     margin-left: 10px;
     border-radius: 100px;
     margin-right: 7px;
@@ -360,3 +400,30 @@ body{
 .activatedLike{
     color:blue;
 }
+
+/* found page */
+.foundContainer{
+    border: 1px solid;
+    display: -webkit-inline-box;
+    padding: 15px;
+    margin-left: 20px;
+    padding-right: 73%;
+    background: white;
+}
+.foundContainer:hover{
+    background-color:#ebeef4;
+   
+}
+.foundImage{
+    border-radius: 40px;
+    width: 70px;
+    height: 70px;
+}
+.foundSecondName, .foundFirstName{
+    padding-left: 15px;
+    color: black;
+    padding-top: 5px;
+
+}
+
+

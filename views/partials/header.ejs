@@ -13,10 +13,13 @@
              <div class="navbar-header">
                  <a class="navbar-brand" href="/">FreeBook</a>
             </div> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <form class=" form-inline  navbar-nav navbarleft d-inline" >
-                    <input value="<%-user.name%>" id="searchbar" class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+                <form class=" form-inline  navbar-nav navbarleft d-inline" action="/profile/searchByUsername/<%-user.username%>" method="POST" >
+                     <input value="@<%-user.username%>" id="searchbar" class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search" name="userToFind">
                 </form>
               <div class="navbar-nav ml-auto">
                     
@@ -31,13 +34,13 @@
                           <a class="nav-link" href="#">
                               <div class="navbarUser">
                                     <img src="<%-user.profilePic%>" alt="" class="navbarProfilePic">
-                                    <%-user.name%>
+                                    
                               </div>
                               
                         </a>
                      </li>
                      <li class="nav-item">
-                          <a class="nav-link" href="/register"><i class="fas fa-sign-out-alt"></i></a>
+                          <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
                      </li>
               </div>
             </div>

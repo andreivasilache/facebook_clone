@@ -1,0 +1,16 @@
+<% include ./partials/header %>
+
+<h1>Results:</h1>
+<div>
+    <a href="/profile/<%=user.username%>/people/<%=FoundUser.username%>">
+        <div  class="foundContainer">
+            <img src="<%=FoundUser.profilePic%>" class="foundImage" alt="">
+            <h1 class="foundFirstName"><%=FoundUser.firstName%></h1>
+            <h1 class="foundSecondName"><%=FoundUser.secondName%></h1>
+        </div>
+    </a>
+    
+</div>
+
+
+<%include ./partials/footer %>

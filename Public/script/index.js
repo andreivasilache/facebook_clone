@@ -1,7 +1,9 @@
 // Default hide elements
 $(".commentsItter").hide();
 $(".commShow").hide();
-
+$("#quoteTextarea").hide();
+$(".profilePicEdit").hide();
+$(".profileCoverEdit").hide();
 
 //  login popover
 $("#idLogin").popover({
@@ -30,13 +32,18 @@ $(".postInput").on("focus",function(){
 $(".postInput").on("focusout",function(){
     $(this).css("height","40px");
 });
+
+
 // submit form comment on enter
 $('.addCommentInput').keydown(function(event) {
     // enter has keyCode = 13, change it if you want to use another button
     if (event.keyCode == 13) {
-    this.form.submit();
+        this.form.submit();
     return false;
     }
+});
+$(".quoteTrigger").on("click",function(){
+    $("#quoteTextarea").toggle();
 });
 $(".commentsNumber").on("click",function(){
     $(".commentsItter").toggle();
@@ -44,3 +51,53 @@ $(".commentsNumber").on("click",function(){
 $(".comments").on("click",function(){
     $(".commShow").toggle();
 })
+
+// PROFILE PICTURE
+// profile picture trigger button
+$(".profileImg").on({
+    mouseenter: function () {
+         $(".profilePicEdit").show();
+    },
+    mouseleave: function () {
+        $(".profilePicEdit").hide();
+    }
+});
+// rezolve buton itself hover error
+$(".profilePicEdit").on({
+    mouseenter: function () {
+         $(this).show();
+    },
+    mouseleave: function () {
+         $(".profilePicEdit").hide();
+    }
+});
+
+// resolve button form submit error
+function formSubmitProfilePic(){
+    document.getElementById("profilePicModalForm").submit();
+} 
+
+
+// COVER PICTURE
+$(".coverImg").on({
+    mouseenter: function () {
+         $(".profileCoverEdit").show();
+    },
+    mouseleave: function () {
+        $(".profileCoverEdit").hide();
+    }
+});
+
+// rezolve buton itself hover error
+$(".profileCoverEdit").on({
+    mouseenter: function () {
+         $(this).show();
+    },
+    mouseleave: function () {
+         $(".profileCoverEdit").hide();
+    }
+});
+function formSubmitCoverPic(){
+    document.getElementById("CoverPicModalForm").submit();
+} 
+
