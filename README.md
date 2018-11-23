@@ -1,8 +1,25 @@
 
-# HomeWally #
+# FreeBook #
 
-This application is the first "Real world" application made by myself.
+This application is a small copy of Facebook.
 
-As Web Technologies I used JavaScript, Html, Css And Bootstrap.
+<br>
+What this app includes:
+<br>
 
-Being my first application the code is messy. But we all learn from mistakes ¯\_(ツ)_/¯ 
+<ul>
+    <li> Login/Register </li>
+    <li> Search another user and add him as friend - remove him from friends </li>
+    <li> Like/Dislike posts </li>
+    <li> Add posts - Simple posts or Posts with images </li>
+    <li> Add comments - Delete your own comments </li>
+</ul>
+
+In app development I used: <br> 
+  for Front-End: Html, Css ,Javascript , jQuery, Bootstrap <br>
+  for Back-End: NodeJs, Mongoose, a lot of npm's, Heroku(page host), mLabs(DB host)
+
+
+Portofolio Page Link:http://vasilache-andrei.herokuapp.com/
+<br>
+Application Link:https://morning-hollows-63838.herokuapp.com/register&login
