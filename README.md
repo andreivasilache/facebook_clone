@@ -17,7 +17,7 @@ What this app includes:
 
 In app development I used: <br> 
   for Front-End: Html, Css ,Javascript , jQuery, Bootstrap <br>
-  for Back-End: NodeJs, Mongoose, a lot of npm's, Heroku(page host), mLabs(DB host)
+  for Back-End: NodeJs, Mongoose, a lot of npms, Heroku(page host), mLabs(DB host)
 
 
 Portofolio Page Link:http://vasilache-andrei.herokuapp.com/
