@@ -20,6 +20,6 @@ In app development I used: <br>
   for Back-End: NodeJs, Mongoose, a lot of npms, Heroku(page host), mLabs(DB host)
 
 
-Portofolio Page Link:http://vasilache-andrei.herokuapp.com/
+Portfolio Page Link:http://vasilache-andrei.herokuapp.com/
 <br>
 Application Link:https://morning-hollows-63838.herokuapp.com/register&login
